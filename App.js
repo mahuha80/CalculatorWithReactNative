@@ -1,34 +1,46 @@
-import React from 'react';
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
-import background from './assets/background.png'
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  TouchableOpacity,
+  Alert
+} from "react-native";
+import background from "./assets/background.png";
 
 export default function App() {
+  const [a, setA] = useState("");
+  const [operation, setOperation] = useState("");
+  const [b, setB] = useState("");
+  const [sum, setSum] = useState("");
+  setOnClick=()=>{
+    Alert.alert("hello anh em ");
+  }
   return (
-    <ImageBackground
-      source={background}
-      style={styles.container}>
-        {/*  */}
+    <ImageBackground source={background} style={styles.container}>
+      {/*  */}
       <View style={styles.one}>
         <View style={styles.handle}>
-          <Text style={styles.handle_text}>a</Text>
-          <Text style={styles.handle_text}>+</Text>
-          <Text style={styles.handle_text}>b</Text>
+          <Text style={styles.handle_text}>{a}</Text>
+          <Text style={styles.handle_text}>{operation}</Text>
+          <Text style={styles.handle_text}>{b}</Text>
         </View>
         <View style={styles.result}>
-          <Text style={styles.result_text}>result</Text>
+          <Text style={styles.result_text}>{sum}</Text>
         </View>
       </View>
       {/*  */}
       <View style={styles.two}>
         <View style={styles.row}>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={()=>{setSum("0");setOperation("");setB(""),setA("")}} >
             <Text style={styles.text_btn}>C</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
-            <Text style={styles.text_btn,{fontSize:60,color:'white'}}>+</Text>
+            <Text style={styles.text_btn}>±</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
-            <Text style={styles.text_btn}>%</Text>
+            <Text onPress={(a)=>{Alert.alert(a)}} style={styles.text_btn}>%</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
             <Text style={styles.text_btn}>/</Text>
@@ -45,7 +57,7 @@ export default function App() {
             <Text style={styles.text_btn}>9</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
-            <Text style={styles.text_btn,{fontSize:45,paddingTop:25,color:'white'}}>*</Text>
+            <Text style={styles.text_btn}>*</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.row}>
@@ -59,7 +71,11 @@ export default function App() {
             <Text style={styles.text_btn}>6</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
-            <Text style={styles.text_btn,{fontSize:65,color:'white'}}>-</Text>
+            <Text
+              style={[styles.text_btn, styles.customSize, { marginBottom: 30 }]}
+            >
+              -
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.row}>
@@ -75,7 +91,6 @@ export default function App() {
           <TouchableOpacity style={styles.btn}>
             <Text style={styles.text_btn}>+</Text>
           </TouchableOpacity>
-
         </View>
         <View style={styles.row}>
           <TouchableOpacity style={styles.btn}>
@@ -88,13 +103,14 @@ export default function App() {
             <Text style={styles.text_btn}>.</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
-            <Text style={styles.text_btn}>=</Text>
+            <Text
+              style={[styles.text_btn, styles.customSize, { marginRight: 8 }]}
+            >
+              =
+            </Text>
           </TouchableOpacity>
         </View>
-
       </View>
-
-
     </ImageBackground>
   );
 }
@@ -103,62 +119,67 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     marginTop: 24,
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingLeft:15
-    
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
   },
   row: {
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginBottom: 20
-  }, one: {
-    display: 'flex',
+  },
+  one: {
+    display: "flex",
     flex: 0.29,
-    width: '100%',
-    height: '100%',
-    flexDirection:"row",
-    justifyContent: 'center',
-    alignItems:'center',
-    marginBottom:20
-  }, two: {
-    display: 'flex',
+    width: "100%",
+    height: "100%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginBottom: 20
+  },
+  two: {
+    display: "flex",
     flex: 0.71,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'flex-start',
-    marginTop:50,
-  }, text_btn: {
-    fontSize: 45,
-    color: 'white',
-    alignSelf: 'center',
-    borderColor:'red',
-    width:60,
-    height:60,
-    justifyContent: 'center',
-    marginLeft:15
-  }, result_text: {
+    width: "80%",
+    height: "100%",
+    justifyContent: "flex-start",
+    marginTop: 50
+  },
+  text_btn: {
+    fontSize: 40,
+    color: "white",
+    alignSelf: "center",
+    borderColor: "red",
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    marginLeft: 15
+  },
+  result_text: {
     fontSize: 50,
-    color: 'white',
-    fontWeight:'bold',
-    marginLeft:70,
-    marginBottom:50
-
-  }, handle_text: {
-    color: 'white',
-    fontSize: 20,
-  },btn:{
-    width:50,
-    height:50,
-    justifyContent: 'center',
-  },handle:{
-    marginRight:60,
-    marginTop:30
+    color: "white",
+    fontWeight: "bold",
+    marginBottom: 50
+  },
+  handle: {
+    marginTop: 30
+  },
+  handle_text: {
+    color: "white",
+    fontSize: 20
+  },
+  btn: {
+    width: 50,
+    height: 50,
+    justifyContent: "center"
+  },
+  customSize: {
+    fontSize: 60
   }
 });
